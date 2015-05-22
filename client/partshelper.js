@@ -1,5 +1,5 @@
 // Helper for the parts template that feeds it data
-Meteor.subscribe('parts');
+
 
 
 

@@ -2,7 +2,7 @@
 //     var test = Parts.find({workcenter: '304A'}).fetch();
 //     console.log(test[0].cavitation);
 // });
-Meteor.subscribe('parts');
+
 //console.log("Getting a single entry: "+ Parts.find().count() );
 
 var start_time = moment().hour(7).format("YYYY-MM-DD hh:mm:ss.SSS");
