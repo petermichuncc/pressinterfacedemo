@@ -11,7 +11,7 @@ Template.shift1.helpers({
  {
   //basically show the end job button if there was a submit job button pressed more recently
   //than an end job button
-   num= Machines.find().fetch().pop().cellnum;
+   num= "1"
 
   if (typeof Hours.find({}).fetch().pop()=== 'object')
   {
@@ -28,7 +28,7 @@ if (typeof Hours.find().fetch().pop()==='undefined')
  } ,
  submitjob: function ()
  {
-   num= Machines.find().fetch().pop().cellnum;
+    num= "1"
 
   //show the submit job button if there was an end job button clicked more recently than
   //a submit job button , or show it by default.

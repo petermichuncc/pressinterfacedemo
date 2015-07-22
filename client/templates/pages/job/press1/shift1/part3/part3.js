@@ -8,7 +8,7 @@ Meteor.subscribe('machines');
  Template.part3.helpers({
 
 hour1p: function () {
-      num= Machines.find().fetch().pop().cellnum;
+      num= "1"
     
      now="13"
      month=moment().format("MM")
@@ -23,7 +23,7 @@ hour1p: function () {
    },
    
    hour2p: function () {
-    num= Machines.find().fetch().pop().cellnum;
+    num= "1"
      now="14"
     month=moment().format("MM")
     day=moment().format("DD")
@@ -38,7 +38,7 @@ hour1p: function () {
 
 planned1: function (){
           //planned will be multiplier by the time the actual actually runs
-          num= Machines.find().fetch().pop().cellnum;
+          num= "1"
           now="13"
           month=moment().format("MM")
           day=moment().format("DD")
@@ -130,7 +130,7 @@ planned1: function (){
            
       
      
-                num= Machines.find().fetch().pop().cellnum;
+               num= "1"
           now="13"
           month=moment().format("MM")
           day=moment().format("DD")
@@ -162,17 +162,17 @@ planned1: function (){
             }
                 
    
-                      planned=1000/Number(cycletime)
-          
+                      planne1p=1000/Number(cycletime)
+                      planned1p=parseInt(planned1p)
               
-             return parseInt(planned)
+             return planned1p
            }
           
           
            },    
        planned2: function (){
           //planned will be multiplier by the time the actual actually runs
-          num= Machines.find().fetch().pop().cellnum;
+          num= "1"
           now="14"
           month=moment().format("MM")
           day=moment().format("DD")
@@ -264,7 +264,7 @@ planned1: function (){
            
       
      
-                num= Machines.find().fetch().pop().cellnum;
+         num= "1"
           now="14"
           month=moment().format("MM")
           day=moment().format("DD")
@@ -311,7 +311,7 @@ plannedc1: function (){
           // so if the job started this hour then just return the EH
           //If the job started in a previous hour then count how many hours have passed?
           //so how do I count hours since job was submitted
-          num= Machines.find().fetch().pop().cellnum;
+          num= "1"
           now="13"
           month=moment().format("MM")
           day=moment().format("DD")
@@ -401,7 +401,7 @@ plannedc1: function (){
           // so if the job started this hour then just return the EH
           //If the job started in a previous hour then count how many hours have passed?
           //so how do I count hours since job was submitted
-          num= Machines.find().fetch().pop().cellnum;
+          num= "1"
           now="13"
           month=moment().format("MM")
           day=moment().format("DD")
@@ -451,7 +451,7 @@ plannedc1: function (){
           // so if the job started this hour then just return the EH
           //If the job started in a previous hour then count how many hours have passed?
           //so how do I count hours since job was submitted
-          num= Machines.find().fetch().pop().cellnum;
+          num= "1"
           now="14"
           month=moment().format("MM")
           day=moment().format("DD")
@@ -541,7 +541,7 @@ plannedc1: function (){
           // so if the job started this hour then just return the EH
           //If the job started in a previous hour then count how many hours have passed?
           //so how do I count hours since job was submitted
-          num= Machines.find().fetch().pop().cellnum;
+          num= "1"
           now="14"
           month=moment().format("MM")
           day=moment().format("DD")
@@ -589,7 +589,7 @@ plannedc1: function (){
 
 incomingcycles1: function () {
         //grab all cycles from today
-      num= Machines.find().fetch().pop().cellnum;
+     num= "1"
     
       
     month=moment().format("MM")
@@ -670,7 +670,7 @@ if (typeof Hours.findOne({hour: now, month:month, day:day,press:num}) === 'undef
       },
 
      incomingcycles1p: function () {
-        num= Machines.find().fetch().pop().cellnum;
+       num= "1"
      
     month=moment().format("MM")
     day=moment().format("DD")
@@ -720,7 +720,7 @@ if (typeof Hours.findOne({hour: now, month:month, day:day,press:num}) === 'undef
     
      incomingcycles2: function () {
         //grab all cycles from today
-      num= Machines.find().fetch().pop().cellnum;
+     num= "1"
     
       
     month=moment().format("MM")
@@ -801,7 +801,7 @@ if (typeof Hours.findOne({hour: now, month:month, day:day,press:num}) === 'undef
       },
 
      incomingcycles2p: function () {
-        num= Machines.find().fetch().pop().cellnum;
+       num= "1"
      
     month=moment().format("MM")
     day=moment().format("DD")
@@ -853,7 +853,7 @@ if (typeof Hours.findOne({hour: now, month:month, day:day,press:num}) === 'undef
 
         incomingc1:function(){
 //basically start from the previous job 
-		num= Machines.find().fetch().pop().cellnum;
+		num= "1"
     
       start=moment().format("YYYY-MM-DD 13:00:00.000")
     end=moment().format("YYYY-MM-DD 14:00:00.000")
@@ -938,7 +938,7 @@ if (typeof Hours.findOne({hour: now, month:month, day:day,press:num}) === 'undef
 incomingc1p:function()
 {
 //copy over incoming cycles 1p and change the start time to 
-num= Machines.find().fetch().pop().cellnum;
+num= "1"
      
     month=moment().format("MM")
     day=moment().format("DD")
@@ -988,7 +988,7 @@ num= Machines.find().fetch().pop().cellnum;
 
    incomingc2:function(){
 //basically start from the previous job 
-		num= Machines.find().fetch().pop().cellnum;
+		num= "1"
     
       start=moment().format("YYYY-MM-DD 14:00:00.000")
     end=moment().format("YYYY-MM-DD 15:00:00.000")
@@ -1073,7 +1073,7 @@ if (typeof Hours.findOne({hour: now, month:month, day:day,press:num}) === 'undef
 incomingc2p:function()
 {
 //copy over incoming cycles 1p and change the start time to 
-num= Machines.find().fetch().pop().cellnum;
+num= "1"
      
     month=moment().format("MM")
     day=moment().format("DD")
@@ -1125,7 +1125,7 @@ num= Machines.find().fetch().pop().cellnum;
 
 earnedhours1: function() {
         //I will need to put planned in here and incoming cycles
-       num= Machines.find().fetch().pop().cellnum;
+       num= "1"
           now="13"
           month=moment().format("MM")
           day=moment().format("DD")
@@ -1221,7 +1221,7 @@ earnedhours1: function() {
             },
 earnedhours1p: function() {
      			
-     num= Machines.find().fetch().pop().cellnum;
+    num= "1"
           now="13"
           month=moment().format("MM")
           day=moment().format("DD")
@@ -1271,7 +1271,7 @@ earnedhours1p: function() {
 
 
   earnedhours2: function(){
-         num= Machines.find().fetch().pop().cellnum;
+         num= "1"
           now="14"
           month=moment().format("MM")
           day=moment().format("DD")
@@ -1376,7 +1376,7 @@ earnedhours1p: function() {
      
 earnedhours2p: function() {
      
-                 num= Machines.find().fetch().pop().cellnum;
+         num= "1"
           now="14"
           month=moment().format("MM")
           day=moment().format("DD")
@@ -1422,11 +1422,15 @@ earnedhours2p: function() {
      
      
             },
+earnedhourstotal: function(){
+        //I will need to copy all incoming cycles and planned into here then total them
 
+
+},
 changeStatus1: function() {
         //I will need to put planned in here and incoming cycles
         
-       num= Machines.find().fetch().pop().cellnum;
+       num= "1"
           now="14"
           month=moment().format("MM")
           day=moment().format("DD")
@@ -1531,7 +1535,7 @@ changeStatus1: function() {
             },
 changeStatus1p: function() {
      			
-     num= Machines.find().fetch().pop().cellnum;
+     num= "1"
           now="14"
           month=moment().format("MM")
           day=moment().format("DD")
@@ -1590,7 +1594,7 @@ changeStatus1p: function() {
 
 
  changeStatus2: function(){
-         num= Machines.find().fetch().pop().cellnum;
+         num= "1"
           now="14"
           month=moment().format("MM")
           day=moment().format("DD")
@@ -1703,7 +1707,7 @@ changeStatus1p: function() {
      
 changeStatus2p: function() {
      
-                 num= Machines.find().fetch().pop().cellnum;
+          num= "1"
           now="14"
           month=moment().format("MM")
           day=moment().format("DD")
@@ -1761,7 +1765,7 @@ changeStatus2p: function() {
 
     part1: function ()
    {
-   num= Machines.find().fetch().pop().cellnum;
+   num= "1"
     now = "14"
     month=moment().format("MM")
     day=moment().format("DD")
@@ -1792,7 +1796,7 @@ var part =Parts.findOne({hour: now, month:month, day:day,press:num})
      },
    part1p: function ()
    {
-   num= Machines.find().fetch().pop().cellnum;
+   num= "1"
      now= "13"
     month=moment().format("MM")
     day=moment().format("DD")
@@ -1810,7 +1814,7 @@ if(typeof Parts.find({hour: now, month:month, day:day,press:num}).fetch().pop() 
 
     part2: function ()
    {
-  num= Machines.find().fetch().pop().cellnum;
+  num= "1"
      now = "14"
     month=moment().format("MM")
     day=moment().format("DD")
@@ -1838,7 +1842,7 @@ var part =Parts.findOne({hour: now, month:month, day:day})
    },
    part2p: function ()
    {
-  num= Machines.find().fetch().pop().cellnum;
+  num= "1"
      now= "14"
      month=moment().format("MM")
     day=moment().format("DD")
@@ -1864,7 +1868,7 @@ if(typeof Parts.find({hour: now, month:month, day:day,press:num}).fetch().pop() 
 
    hour1second: function()
  {//if the part count for this hour is <=2 then return true
-   num= Machines.find().fetch().pop().cellnum;
+   num= "1"
     month=moment().format("MM")
     day=moment().format("DD")
     start=moment().format("YYYY-MM-DD 13:00:00.000")
@@ -1886,7 +1890,7 @@ if(typeof Parts.find({hour: now, month:month, day:day,press:num}).fetch().pop() 
 //       }  
  },
  hour2second: function()
- { num= Machines.find().fetch().pop().cellnum;
+ { num= "1"
     
       
     month=moment().format("MM")
