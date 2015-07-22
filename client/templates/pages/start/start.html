@@ -8,56 +8,9 @@
 
 <form class="workcenterSelection">
 <select class="form-control" id="someId">
-
-    <option value=  "3101N"> 3101N </option>
-      
-    <option value=  "3101G">3101G  </option>
-     
-    <option value=  "3101D"> 3101D </option>
-     
-    <option value=  "3101J"> 3101J </option>
-     
-    <option value=   "3101M"> 3101M </option>
-
-    <option value=  "3101L">3101L  </option>
-
-    <option value=  "3100A">3100A  </option>
-     
-     <option value=  "3100B">3100B  </option>
-
-     <option value=  "3100C">3100C  </option>
- 
-     <option value= "3100S">3100S  </option>
-      
-     <option value=  "3028G">3028G  </option>
-
-    <option value=   "3028F">3028F  </option>
-
-    <option value=  "3028C">3028C  </option>
- 
-     <option value=  "3028I">3028I  </option>
-      
-     <option value= "3027C"> 3027C </option>
-
-     <option value=  "3300H">3300H  </option>
- 
-     <option value=  "3100N">3100N  </option>
- 
-     <option value= "3100G">3100G  </option>
-      
-     <option value= "3100E">3100E  </option>
-
-    <option value=  "3100D">3100D  </option>
- 
-    <option value= "3101K">3101K  </option>
- 
-    <option value=  "3100Q"> 3100Q </option>
-      
-     <option value= "3101H">3101H  </option>
-
-     <option value= "3101I">3101I  </option>
- 
-     <option value= "3101B">3101B  </option>
+{{#each workcenters}}
+    <option value="{{CellID}}"> {{CellID}} </option>
+{{/each}}
 
   
 </select>
@@ -75,6 +28,54 @@
 				
 
 
-				
-			
-			
+		<!-- 		
+			 <option value="3101N"> 3101N </option>
+      
+    <option value="3101G">3101G  </option>
+     
+    <option value="3101D"> 3101D </option>
+     
+    <option value="3101J"> 3101J </option>
+     
+    <option value="3101M"> 3101M </option>
+
+    <option value="3101L">3101L  </option>
+
+    <option value="3100A">3100A  </option>
+     
+     <option value="3100B">3100B  </option>
+
+     <option value="3100C">3100C  </option>
+ 
+     <option value="3100S">3100S  </option>
+      
+     <option value="3028G">3028G  </option>
+
+    <option value="3028F">3028F  </option>
+
+    <option value="3028C">3028C  </option>
+ 
+     <option value="3028I">3028I  </option>
+      
+     <option value="3027C"> 3027C </option>
+
+     <option value="3300H">3300H  </option>
+ 
+     <option value="3100N">3100N  </option>
+ 
+     <option value="3100G">3100G  </option>
+      
+     <option value="3100E">3100E  </option>
+
+    <option value="3100D">3100D  </option>
+ 
+    <option value="3101K">3101K  </option>
+ 
+    <option value="3100Q"> 3100Q </option>
+      
+     <option value="3101H">3101H  </option>
+
+     <option value="3101I">3101I  </option>
+ 
+     <option value="3101B">3101B  </option>
+			 -->

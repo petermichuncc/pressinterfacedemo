@@ -6,7 +6,7 @@ Meteor.subscribe('entries');
 Template.table.events({
 "submit .workcenterSelection": function(event){
 event.defaultPrevented;
-console.log(event);
+
 var text = $( "#someId" ).val();
 
 var post = {
@@ -33,7 +33,7 @@ var post = {
 
 // Meteor.subscribe('hours');
 //      Meteor.call('hoursInsert', hour)
-console.log(text);
+
 Meteor.subscribe('parts');
      Meteor.call('partsInsert', post)
 //Here is the logic to determine the page to go to based on the time of day
