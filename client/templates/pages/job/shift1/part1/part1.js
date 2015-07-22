@@ -1,5 +1,5 @@
 
-  Meteor.subscribe('cycles-recent', moment().format("YYYY-MM-DD 7:00:00.000"))
+  Meteor.subscribe('cycles-recent', moment().subtract(1, 'days').format("YYYY-MM-DD 23:00:00.000"))
    Meteor.subscribe('parts');
 Meteor.subscribe('machines');
 
@@ -93,7 +93,7 @@ planned1: function (){
      
   
      	
-            if(typeof Parts.findOne({hour:now, month:month, day:day,press:num}) ==='undefined' && moment().format("HH") >=now&&(Hours.find({press:num,timestamp:{$lte: timestamp}, month:month}).fetch().pop().timestamp<Parts.find({press:num,hour:{$lte: now}, month:month}).fetch().pop().timestamp||Hours.find({press:num, month:month}).fetch().pop().timestamp >timestamp))
+            if(typeof Parts.findOne({hour:now, month:month, day:day,press:num}) ==='undefined' && moment().format("HH") >=now&&(Hours.find({press:num,timestamp:{$lte: timestamp}, month:month}).fetch().pop().timestamp<Parts.find({timestamp: {$lt: timestamp}},{press:num}).fetch().pop().timestamp||Hours.find({press:num, month:month}).fetch().pop().timestamp >timestamp))
           {
             //I need to retrieve the cycle time for the job submitted prior to this hour
             //so find  $lte than the entire time stamp!
@@ -219,7 +219,7 @@ planned1: function (){
      
   
 
-            if(typeof Parts.findOne({hour:now, month:month, day:day,press:num}) ==='undefined' && moment().format("HH") >=now &&(Hours.find({press:num,timestamp:{$lte: timestamp}, month:month}).fetch().pop().timestamp<Parts.find({press:num,hour:{$lte: now}, month:month}).fetch().pop().timestamp||Hours.find({press:num, month:month}).fetch().pop().timestamp >timestamp))
+            if(typeof Parts.findOne({hour:now, month:month, day:day,press:num}) ==='undefined' && moment().format("HH") >=now &&(Hours.find({press:num,timestamp:{$lte: timestamp}, month:month}).fetch().pop().timestamp<Parts.find({timestamp: {$lt: timestamp}},{press:num}).fetch().pop().timestamp||Hours.find({press:num, month:month}).fetch().pop().timestamp >timestamp))
           {
             //I need to retrieve the cycle time for the job submitted prior to this hour
             //so find  $lte than the entire time stamp!
@@ -337,7 +337,7 @@ planned3: function(){
      
   
 
-            if(typeof Parts.findOne({hour:now, month:month, day:day,press:num}) ==='undefined' && moment().format("HH") >=now&&(Hours.find({press:num,timestamp:{$lte: timestamp}, month:month}).fetch().pop().timestamp<Parts.find({press:num,hour:{$lte: now}, month:month}).fetch().pop().timestamp||Hours.find({press:num, month:month}).fetch().pop().timestamp >timestamp))
+            if(typeof Parts.findOne({hour:now, month:month, day:day,press:num}) ==='undefined' && moment().format("HH") >=now&&(Hours.find({press:num,timestamp:{$lte: timestamp}, month:month}).fetch().pop().timestamp<Parts.find({timestamp: {$lt: timestamp}},{press:num}).fetch().pop().timestamp||Hours.find({press:num, month:month}).fetch().pop().timestamp >timestamp))
           {
             //I need to retrieve the cycle time for the job submitted prior to this hour
             //so find  $lte than the entire time stamp!
@@ -464,7 +464,7 @@ plannedc1: function (){
      
   
 
-            if(typeof Parts.findOne({hour:now, month:month, day:day,press:num}) ==='undefined' && moment().format("HH") >=now &&(Hours.find({press:num,timestamp:{$lte: timestamp}, month:month}).fetch().pop().timestamp<Parts.find({press:num,hour:{$lte: now}, month:month}).fetch().pop().timestamp||Hours.find({press:num, month:month}).fetch().pop().timestamp >timestamp))
+            if(typeof Parts.findOne({hour:now, month:month, day:day,press:num}) ==='undefined' && moment().format("HH") >=now &&(Hours.find({press:num,timestamp:{$lte: timestamp}, month:month}).fetch().pop().timestamp<Parts.find({timestamp: {$lt: timestamp}},{press:num}).fetch().pop().timestamp||Hours.find({press:num, month:month}).fetch().pop().timestamp >timestamp))
           {
             //I need to multiply the day of TS by 24 and multiply the day of now by 24
             //Then I need to add the hours of TS to 24 and add the hours of now to current day hours
@@ -598,7 +598,7 @@ plannedc1: function (){
      
   
 
-            if(typeof Parts.findOne({hour:now, month:month, day:day,press:num}) ==='undefined' && moment().format("HH") >=now&&(Hours.find({press:num,timestamp:{$lte: timestamp}, month:month}).fetch().pop().timestamp<Parts.find({press:num,hour:{$lte: now}, month:month}).fetch().pop().timestamp||Hours.find({press:num, month:month}).fetch().pop().timestamp >timestamp))
+            if(typeof Parts.findOne({hour:now, month:month, day:day,press:num}) ==='undefined' && moment().format("HH") >=now&&(Hours.find({press:num,timestamp:{$lte: timestamp}, month:month}).fetch().pop().timestamp<Parts.find({timestamp: {$lt: timestamp}},{press:num}).fetch().pop().timestamp||Hours.find({press:num, month:month}).fetch().pop().timestamp >timestamp))
           {
               timeDays=Number(Parts.find({timestamp: {$lt: timestamp}},{press:num}).fetch().pop().day)
             timeHour=Number(Parts.find({timestamp: {$lt: timestamp}},{press:num}).fetch().pop().hour)  + (Number(timeDays)*24)
@@ -729,7 +729,7 @@ plannedc3: function(){
      
   
 
-            if(typeof Parts.findOne({hour:now, month:month, day:day,press:num}) ==='undefined' && moment().format("HH") >=now&&(Hours.find({press:num,timestamp:{$lte: timestamp}, month:month}).fetch().pop().timestamp<Parts.find({press:num,hour:{$lte: now}, month:month}).fetch().pop().timestamp||Hours.find({press:num, month:month}).fetch().pop().timestamp >timestamp))
+            if(typeof Parts.findOne({hour:now, month:month, day:day,press:num}) ==='undefined' && moment().format("HH") >=now&&(Hours.find({press:num,timestamp:{$lte: timestamp}, month:month}).fetch().pop().timestamp<Parts.find({timestamp: {$lt: timestamp}},{press:num}).fetch().pop().timestamp||Hours.find({press:num, month:month}).fetch().pop().timestamp >timestamp))
           {
              timeDays=Number(Parts.find({timestamp: {$lt: timestamp}},{press:num}).fetch().pop().day)
             timeHour=Number(Parts.find({timestamp: {$lt: timestamp}},{press:num}).fetch().pop().hour)  + (Number(timeDays)*24)
@@ -832,7 +832,7 @@ incomingcycles1: function () {
      count= Parts.find({hour: now, month:month, day:day,press:num}).count()
     
 
-if (typeof Hours.findOne({hour: now, month:month, day:day,press:num}) === 'undefined' &&moment().format("HH")>=now&&(Hours.find({press:num,timestamp:{$lt: timestamp}, month:month}).fetch().pop().timestamp<Parts.find({press:num,hour:{$lt: now}, month:month}).fetch().pop().timestamp||Hours.find({press:num, month:month}).fetch().pop().timestamp >timestamp))
+if (typeof Hours.findOne({hour: now, month:month, day:day,press:num}) === 'undefined' &&moment().format("HH")>=now&&(Hours.find({press:num,timestamp:{$lte: timestamp}, month:month}).fetch().pop().timestamp<Parts.find({timestamp: {$lt: timestamp}},{press:num}).fetch().pop().timestamp||Hours.find({press:num, month:month}).fetch().pop().timestamp >timestamp))
 {
 //all of this when there is a job still running from the previous hour
     
@@ -885,7 +885,7 @@ if (typeof Hours.findOne({hour: now, month:month, day:day,press:num}) === 'undef
     } 
 
    //This code will run if there was not a previous job running
-      if (typeof Hours.findOne({hour: now, month:month, day:day,press:num}) === 'undefined' &&moment().format("HH")>=now&&Hours.find({press:num,timestamp:{$lt: timestamp}, month:month}).fetch().pop().timestamp>Parts.find({press:num,hour:{$lt: now}, month:month}).fetch().pop().timestamp)
+      if (typeof Hours.findOne({hour: now, month:month, day:day,press:num}) === 'undefined' &&moment().format("HH")>=now&&Hours.find({press:num,timestamp:{$lt: timestamp}, month:month}).fetch().pop().timestamp>Parts.find({press:num,timestamp:{$lt: timestamp}, month:month}).fetch().pop().timestamp)
  { 
  if (typeof Parts.findOne({hour: now, month:month, day:day}) === 'object' && count>=1)
       {
@@ -913,7 +913,7 @@ if (typeof Hours.findOne({hour: now, month:month, day:day,press:num}) === 'undef
 
      //a job is still running
      //
-      if (typeof Hours.findOne({hour: now, month:month, day:day,press:num}) === 'undefined'&&moment().format("HH")>=now &&(Hours.find({press:num,timestamp:{$lt: timestamp}, month:month}).fetch().pop().timestamp<Parts.find({press:num,hour:{$lt: now}, month:month}).fetch().pop().timestamp||Hours.find({press:num, month:month}).fetch().pop().timestamp >timestamp))
+      if (typeof Hours.findOne({hour: now, month:month, day:day,press:num}) === 'undefined'&&moment().format("HH")>=now &&(Hours.find({press:num,timestamp:{$lte: timestamp}, month:month}).fetch().pop().timestamp<Parts.find({timestamp: {$lt: timestamp}},{press:num}).fetch().pop().timestamp||Hours.find({press:num, month:month}).fetch().pop().timestamp >timestamp))
       {
       if (typeof Parts.findOne({hour:now, month: month, day: day,press:num})=== 'object'  && count >=2)
       {
@@ -934,7 +934,7 @@ if (typeof Hours.findOne({hour: now, month:month, day:day,press:num}) === 'undef
      }
 
 //There was not a job running into this hour
-     if (typeof Hours.findOne({hour: now, month:month, day:day,press:num}) === 'object' &&moment().format("HH")>=now &&(Hours.find({press:num,timestamp:{$lt: timestamp}, month:month}).fetch().pop().timestamp<Parts.find({press:num,hour:{$lt: now}, month:month}).fetch().pop().timestamp||Hours.find({press:num, month:month}).fetch().pop().timestamp >timestamp))
+     if (typeof Hours.findOne({hour: now, month:month, day:day,press:num}) === 'object' &&moment().format("HH")>=now &&(Hours.find({press:num,timestamp:{$lte: timestamp}, month:month}).fetch().pop().timestamp<Parts.find({timestamp: {$lt: timestamp}},{press:num}).fetch().pop().timestamp||Hours.find({press:num, month:month}).fetch().pop().timestamp >timestamp))
      {
      	//if end job submitted and count is >=1, start from first time stamp and go until end job
 		if (typeof Parts.findOne({hour:now, month: month, day: day,press:num})=== 'object'  && count >=2)
@@ -951,7 +951,7 @@ if (typeof Hours.findOne({hour: now, month:month, day:day,press:num}) === 'undef
     
      incomingcycles2: function () {
         //grab all cycles from today
-    num= Machines.find().fetch().pop().cellnum;
+      num= Machines.find().fetch().pop().cellnum;
     
       
     month=moment().format("MM")
@@ -963,7 +963,7 @@ if (typeof Hours.findOne({hour: now, month:month, day:day,press:num}) === 'undef
      count= Parts.find({hour: now, month:month, day:day,press:num}).count()
     
 
-if (typeof Hours.findOne({hour: now, month:month, day:day,press:num}) === 'undefined' &&moment().format("HH")>=now&&(Hours.find({press:num,timestamp:{$lt: timestamp}, month:month}).fetch().pop().timestamp<Parts.find({press:num,hour:{$lt: now}, month:month}).fetch().pop().timestamp||Hours.find({press:num, month:month}).fetch().pop().timestamp >timestamp))
+if (typeof Hours.findOne({hour: now, month:month, day:day,press:num}) === 'undefined' &&moment().format("HH")>=now&&(Hours.find({press:num,timestamp:{$lte: timestamp}, month:month}).fetch().pop().timestamp<Parts.find({timestamp: {$lt: timestamp}},{press:num}).fetch().pop().timestamp||Hours.find({press:num, month:month}).fetch().pop().timestamp >timestamp))
 {
 //all of this when there is a job still running from the previous hour
     
@@ -986,12 +986,12 @@ if (typeof Hours.findOne({hour: now, month:month, day:day,press:num}) === 'undef
  if (typeof Hours.findOne({hour: now, month:month, day:day,press:num}) === 'object' &&moment().format("HH")>=now&&(Hours.find({press:num,timestamp:{$lt: timestamp}, month:month}).fetch().pop().timestamp<Parts.find({press:num,hour:{$lt: now}, month:month}).fetch().pop().timestamp||Hours.find({press:num, month:month}).fetch().pop().timestamp >timestamp))
  {
 
- 	//in these conditions there was an end job submitted this hour and there was a previous job running into this hour
+  //in these conditions there was an end job submitted this hour and there was a previous job running into this hour
 
-	//
+  //
  if (typeof Parts.findOne({hour: now, month:month, day:day}) === 'object' && count>=1&& Hours.find({hour: now, month:month, day:day,press:num}).fetch().pop().timestamp>Parts.find({press:num, month:month}).fetch().pop().timestamp)
       {
-      	//Do this if the end job TS if greater than part TS
+        //Do this if the end job TS if greater than part TS
     incomingcycles2= Cycles.find({PressNumber: num,AutoStatus: "1",CycleTimeStamp: {$gte: start, $lt: moment(Hours.find({hour: now, month:month, day:day,press:num}).fetch().pop().timestamp).format("YYYY-MM-DD HH:mm:ss.SSS")}}).count() * Parts.find({timestamp: {$lt: timestamp}},{press:num}).fetch().pop().cavitation;
   }
 
@@ -1016,17 +1016,17 @@ if (typeof Hours.findOne({hour: now, month:month, day:day,press:num}) === 'undef
     } 
 
    //This code will run if there was not a previous job running
-      if (typeof Hours.findOne({hour: now, month:month, day:day,press:num}) === 'undefined' &&moment().format("HH")>=now&&Hours.find({press:num,timestamp:{$lt: timestamp}, month:month}).fetch().pop().timestamp>Parts.find({press:num,hour:{$lt: now}, month:month}).fetch().pop().timestamp)
- {console.log("No job running into this hour and no end job this hour")
+      if (typeof Hours.findOne({hour: now, month:month, day:day,press:num}) === 'undefined' &&moment().format("HH")>=now&&Hours.find({press:num,timestamp:{$lt: timestamp}, month:month}).fetch().pop().timestamp>Parts.find({press:num,timestamp:{$lt: timestamp}, month:month}).fetch().pop().timestamp)
+ { 
  if (typeof Parts.findOne({hour: now, month:month, day:day}) === 'object' && count>=1)
       {
-      	//Do this if the end job TS if greater than part TS
+        //Do this if the end job TS if greater than part TS
     incomingcycles2= Cycles.find({PressNumber: num,AutoStatus: "1",CycleTimeStamp: {$gte: moment(Parts.find({hour:now, month: month, day: day,press:num}, {sort: {minute: 1}, limit: 1}).fetch().pop().timestamp).format("YYYY-MM-DD HH:mm:ss.SSS"), $lt: end}}).count() * Parts.find({hour:now, month: month, day: day,press:num}, {sort: {minute: 1}, limit: 1}).fetch().pop().cavitation;
   
   }
 
   
-	return incomingcycles2 
+  return incomingcycles2
 }
 
       },
@@ -1044,43 +1044,41 @@ if (typeof Hours.findOne({hour: now, month:month, day:day,press:num}) === 'undef
 
      //a job is still running
      //
-      if (typeof Hours.findOne({hour: now, month:month, day:day,press:num}) === 'undefined'&&moment().format("HH")>=now &&(Hours.find({press:num,timestamp:{$lt: timestamp}, month:month}).fetch().pop().timestamp<Parts.find({press:num,hour:{$lt: now}, month:month}).fetch().pop().timestamp||Hours.find({press:num, month:month}).fetch().pop().timestamp >timestamp))
+      if (typeof Hours.findOne({hour: now, month:month, day:day,press:num}) === 'undefined'&&moment().format("HH")>=now &&(Hours.find({press:num,timestamp:{$lte: timestamp}, month:month}).fetch().pop().timestamp<Parts.find({timestamp: {$lt: timestamp}},{press:num}).fetch().pop().timestamp||Hours.find({press:num, month:month}).fetch().pop().timestamp >timestamp))
       {
       if (typeof Parts.findOne({hour:now, month: month, day: day,press:num})=== 'object'  && count >=2)
       {
          //no end job submitted     
        
-        incomingcycles1p= Cycles.find({PressNumber: num,AutoStatus: "1", CycleTimeStamp: {$gte: moment(Parts.find({hour:now, month: month, day: day,press:num}, {sort: {minute: 1}, limit: 2}).fetch().pop()).format("YYYY-MM-DD HH:mm:ss.SSS"), $lt: end}}).count() * Parts.find({hour:now, month: month, day: day,press:num}, {sort: {minute: 1}, limit: 2}).fetch().pop().cavitation;
+        incomingcycles2p= Cycles.find({PressNumber: num,AutoStatus: "1", CycleTimeStamp: {$gte: moment(Parts.find({hour:now, month: month, day: day,press:num}, {sort: {minute: 1}, limit: 2}).fetch().pop()).format("YYYY-MM-DD HH:mm:ss.SSS"), $lt: end}}).count() * Parts.find({hour:now, month: month, day: day,press:num}, {sort: {minute: 1}, limit: 2}).fetch().pop().cavitation;
          
       }
       if (typeof Parts.findOne({hour:now, month: month, day: day,press:num})=== 'object'  && count ===1)
       {//only want to run this if there was not an end job submitted after that last submitted job
          //start from submitted job, go until end job 
        
-        incomingcycles1p= Cycles.find({PressNumber: num,AutoStatus: "1", CycleTimeStamp: {$gte: moment(Parts.find({hour:now, month: month, day: day,press:num}, {sort: {minute: 1}, limit: 1}).fetch().pop()).format("YYYY-MM-DD HH:mm:ss.SSS"), $lt: end}}).count() * Parts.find({hour:now, month: month, day: day,press:num}, {sort: {minute: 1}, limit: 1}).fetch().pop().cavitation;
+        incomingcycles2p= Cycles.find({PressNumber: num,AutoStatus: "1", CycleTimeStamp: {$gte: moment(Parts.find({hour:now, month: month, day: day,press:num}, {sort: {minute: 1}, limit: 1}).fetch().pop()).format("YYYY-MM-DD HH:mm:ss.SSS"), $lt: end}}).count() * Parts.find({hour:now, month: month, day: day,press:num}, {sort: {minute: 1}, limit: 1}).fetch().pop().cavitation;
          
       }  
      
-      	return incomingcycles1p
+        return incomingcycles2p
      }
 
 //There was not a job running into this hour
-     if (typeof Hours.findOne({hour: now, month:month, day:day,press:num}) === 'object' &&moment().format("HH")>=now &&(Hours.find({press:num,timestamp:{$lte: timestamp}, month:month}).fetch().pop().timestamp<Parts.find({press:num,hour:{$lte: now}, month:month}).fetch().pop().timestamp||Hours.find({press:num, month:month}).fetch().pop().timestamp >timestamp))
+     if (typeof Hours.findOne({hour: now, month:month, day:day,press:num}) === 'object' &&moment().format("HH")>=now &&(Hours.find({press:num,timestamp:{$lte: timestamp}, month:month}).fetch().pop().timestamp<Parts.find({timestamp: {$lt: timestamp}},{press:num}).fetch().pop().timestamp||Hours.find({press:num, month:month}).fetch().pop().timestamp >timestamp))
      {
-     	//if end job submitted and count is >=1, start from first time stamp and go until end job
-		if (typeof Parts.findOne({hour:now, month: month, day: day,press:num})=== 'object'  && count >=2)
+      //if end job submitted and count is >=1, start from first time stamp and go until end job
+    if (typeof Parts.findOne({hour:now, month: month, day: day,press:num})=== 'object'  && count >=2)
       {
                
-        incomingcycles1p=  Cycles.find({PressNumber: num,AutoStatus: "1", CycleTimeStamp: {$gte: moment(Parts.find({hour:now, month: month, day: day,press:num}, {sort: {minute: 1}, limit: 2}).fetch().pop()).format("YYYY-MM-DD HH:mm:ss.SSS"), $lt: moment(Hours.find({hour: now, month:month, day:day,press:num}).fetch().pop().timestamp).format("YYYY-MM-DD HH:mm:ss.SSS")}}).count() * Parts.find({hour:now, month: month, day: day,press:num}, {sort: {minute: 1}, limit: 1}).fetch().pop().cavitation;
+        incomingcycles2p=  Cycles.find({PressNumber: num,AutoStatus: "1", CycleTimeStamp: {$gte: moment(Parts.find({hour:now, month: month, day: day,press:num}, {sort: {minute: 1}, limit: 2}).fetch().pop()).format("YYYY-MM-DD HH:mm:ss.SSS"), $lt: moment(Hours.find({hour: now, month:month, day:day,press:num}).fetch().pop().timestamp).format("YYYY-MM-DD HH:mm:ss.SSS")}}).count() * Parts.find({hour:now, month: month, day: day,press:num}, {sort: {minute: 1}, limit: 1}).fetch().pop().cavitation;
                 
       }
             
-     return incomingcycles1p
+     return incomingcycles2p
      }
       },
-          
-
-    incomingcycles3: function () {
+     incomingcycles3: function () {
         //grab all cycles from today
       num= Machines.find().fetch().pop().cellnum;
     
@@ -1094,7 +1092,7 @@ if (typeof Hours.findOne({hour: now, month:month, day:day,press:num}) === 'undef
      count= Parts.find({hour: now, month:month, day:day,press:num}).count()
     
 
-if (typeof Hours.findOne({hour: now, month:month, day:day,press:num}) === 'undefined' &&moment().format("HH")>=now&&(Hours.find({press:num,timestamp:{$lt: timestamp}, month:month}).fetch().pop().timestamp<Parts.find({press:num,hour:{$lt: now}, month:month}).fetch().pop().timestamp||Hours.find({press:num, month:month}).fetch().pop().timestamp >timestamp))
+if (typeof Hours.findOne({hour: now, month:month, day:day,press:num}) === 'undefined' &&moment().format("HH")>=now&&(Hours.find({press:num,timestamp:{$lte: timestamp}, month:month}).fetch().pop().timestamp<Parts.find({timestamp: {$lt: timestamp}},{press:num}).fetch().pop().timestamp||Hours.find({press:num, month:month}).fetch().pop().timestamp >timestamp))
 {
 //all of this when there is a job still running from the previous hour
     
@@ -1102,28 +1100,28 @@ if (typeof Hours.findOne({hour: now, month:month, day:day,press:num}) === 'undef
  if (typeof Parts.findOne({hour: now, month:month, day:day,press:num}) === 'undefined' && moment().format("HH") >=now)
 { 
   //multiply it by the cavitation of the the job less than the current hour
-     incomingcycles1=  Cycles.find({PressNumber: num,AutoStatus: "1",CycleTimeStamp: {$gte: start, $lt: end}}).count() * Parts.find({timestamp: {$lt: timestamp}},{press:num}).fetch().pop().cavitation;
+     incomingcycles3=  Cycles.find({PressNumber: num,AutoStatus: "1",CycleTimeStamp: {$gte: start, $lt: end}}).count() * Parts.find({timestamp: {$lt: timestamp}},{press:num}).fetch().pop().cavitation;
   
     }
      if (typeof Parts.findOne({hour: now, month:month, day:day,press:num}) === 'object' && count>=1)
       { //show all the data from the previous job until the first job is submitted
-    incomingcycles1= Cycles.find({PressNumber: num,AutoStatus: "1",CycleTimeStamp: {$gte: start, $lt: moment(Parts.find({hour:now, month: month, day: day,press:num}, {sort: {minute: 1}, limit: 1}).fetch().pop().timestamp).format("YYYY-MM-DD HH:mm:ss.SSS")}}).count() *Parts.find({timestamp: {$lt: timestamp}},{press:num}).fetch().pop().cavitation;
+    incomingcycles3= Cycles.find({PressNumber: num,AutoStatus: "1",CycleTimeStamp: {$gte: start, $lt: moment(Parts.find({hour:now, month: month, day: day,press:num}, {sort: {minute: 1}, limit: 1}).fetch().pop().timestamp).format("YYYY-MM-DD HH:mm:ss.SSS")}}).count() *Parts.find({timestamp: {$lt: timestamp}},{press:num}).fetch().pop().cavitation;
   }
 
-    return incomingcycles1 
+    return incomingcycles3 
 }
  //These conditions assume that there is a job still running
 
  if (typeof Hours.findOne({hour: now, month:month, day:day,press:num}) === 'object' &&moment().format("HH")>=now&&(Hours.find({press:num,timestamp:{$lt: timestamp}, month:month}).fetch().pop().timestamp<Parts.find({press:num,hour:{$lt: now}, month:month}).fetch().pop().timestamp||Hours.find({press:num, month:month}).fetch().pop().timestamp >timestamp))
  {
 
- 	//in these conditions there was an end job submitted this hour and there was a previous job running into this hour
+  //in these conditions there was an end job submitted this hour and there was a previous job running into this hour
 
-	//
+  //
  if (typeof Parts.findOne({hour: now, month:month, day:day}) === 'object' && count>=1&& Hours.find({hour: now, month:month, day:day,press:num}).fetch().pop().timestamp>Parts.find({press:num, month:month}).fetch().pop().timestamp)
       {
-      	//Do this if the end job TS if greater than part TS
-    incomingcycles1= Cycles.find({PressNumber: num,AutoStatus: "1",CycleTimeStamp: {$gte: start, $lt: moment(Hours.find({hour: now, month:month, day:day,press:num}).fetch().pop().timestamp).format("YYYY-MM-DD HH:mm:ss.SSS")}}).count() * Parts.find({timestamp: {$lt: timestamp}},{press:num}).fetch().pop().cavitation;
+        //Do this if the end job TS if greater than part TS
+    incomingcycles3= Cycles.find({PressNumber: num,AutoStatus: "1",CycleTimeStamp: {$gte: start, $lt: moment(Hours.find({hour: now, month:month, day:day,press:num}).fetch().pop().timestamp).format("YYYY-MM-DD HH:mm:ss.SSS")}}).count() * Parts.find({timestamp: {$lt: timestamp}},{press:num}).fetch().pop().cavitation;
   }
 
   
@@ -1131,7 +1129,7 @@ if (typeof Hours.findOne({hour: now, month:month, day:day,press:num}) === 'undef
       {
         //the start time is same.  end at end job time stamp
 
-    incomingcycles1= Cycles.find({PressNumber: num,AutoStatus: "1",CycleTimeStamp: {$gte: start, $lt: moment(Hours.find({hour: now, month:month, day:day,press:num}).fetch().pop().timestamp).format("YYYY-MM-DD HH:mm:ss.SSS")}}).count() * Parts.find({timestamp: {$lt: timestamp}},{press:num}).fetch().pop().cavitation;
+    incomingcycles3= Cycles.find({PressNumber: num,AutoStatus: "1",CycleTimeStamp: {$gte: start, $lt: moment(Hours.find({hour: now, month:month, day:day,press:num}).fetch().pop().timestamp).format("YYYY-MM-DD HH:mm:ss.SSS")}}).count() * Parts.find({timestamp: {$lt: timestamp}},{press:num}).fetch().pop().cavitation;
   }
  
 //This find the last submitted part prior to this hour
@@ -1139,25 +1137,25 @@ if (typeof Hours.findOne({hour: now, month:month, day:day,press:num}) === 'undef
  if (typeof Parts.findOne({hour: now, month:month, day:day,press:num}) === 'undefined'&& moment().format("HH") >=now)
 {
   //There has to be a job running for this to happen
-     incomingcycles1= Cycles.find({PressNumber: num,AutoStatus: "1",CycleTimeStamp: {$gte: start, $lt: moment(Hours.find({hour: now, month:month, day:day,press:num}).fetch().pop().timestamp).format("YYYY-MM-DD HH:mm:ss.SSS")}}).count() * Parts.find({timestamp: {$lt: timestamp}},{press:num}).fetch().pop().cavitation;
+     incomingcycles3= Cycles.find({PressNumber: num,AutoStatus: "1",CycleTimeStamp: {$gte: start, $lt: moment(Hours.find({hour: now, month:month, day:day,press:num}).fetch().pop().timestamp).format("YYYY-MM-DD HH:mm:ss.SSS")}}).count() * Parts.find({timestamp: {$lt: timestamp}},{press:num}).fetch().pop().cavitation;
   
     }
    
-    return incomingcycles1 
+    return incomingcycles3 
     } 
 
    //This code will run if there was not a previous job running
-      if (typeof Hours.findOne({hour: now, month:month, day:day,press:num}) === 'undefined' &&moment().format("HH")>=now&&Hours.find({press:num,timestamp:{$lte: timestamp}, month:month}).fetch().pop().timestamp>Parts.find({press:num,hour:{$lte: now}, month:month}).fetch().pop().timestamp)
- {
+      if (typeof Hours.findOne({hour: now, month:month, day:day,press:num}) === 'undefined' &&moment().format("HH")>=now&&Hours.find({press:num,timestamp:{$lt: timestamp}, month:month}).fetch().pop().timestamp>Parts.find({press:num,timestamp:{$lt: timestamp}, month:month}).fetch().pop().timestamp)
+ { 
  if (typeof Parts.findOne({hour: now, month:month, day:day}) === 'object' && count>=1)
       {
-      	//Do this if the end job TS if greater than part TS
-    incomingcycles1= Cycles.find({PressNumber: num,AutoStatus: "1",CycleTimeStamp: {$gte: moment(Parts.find({hour:now, month: month, day: day,press:num}, {sort: {minute: 1}, limit: 1}).fetch().pop().timestamp).format("YYYY-MM-DD HH:mm:ss.SSS"), $lt: end}}).count() * Parts.find({hour:now, month: month, day: day,press:num}, {sort: {minute: 1}, limit: 1}).fetch().pop().cavitation;
+        //Do this if the end job TS if greater than part TS
+    incomingcycles3= Cycles.find({PressNumber: num,AutoStatus: "1",CycleTimeStamp: {$gte: moment(Parts.find({hour:now, month: month, day: day,press:num}, {sort: {minute: 1}, limit: 1}).fetch().pop().timestamp).format("YYYY-MM-DD HH:mm:ss.SSS"), $lt: end}}).count() * Parts.find({hour:now, month: month, day: day,press:num}, {sort: {minute: 1}, limit: 1}).fetch().pop().cavitation;
   
   }
 
   
-	return incomingcycles1 
+  return incomingcycles3
 }
 
       },
@@ -1175,40 +1173,41 @@ if (typeof Hours.findOne({hour: now, month:month, day:day,press:num}) === 'undef
 
      //a job is still running
      //
-      if (typeof Hours.findOne({hour: now, month:month, day:day,press:num}) === 'undefined'&&moment().format("HH")>=now &&(Hours.find({press:num,timestamp:{$lt: timestamp}, month:month}).fetch().pop().timestamp<Parts.find({press:num,hour:{$lt: now}, month:month}).fetch().pop().timestamp||Hours.find({press:num, month:month}).fetch().pop().timestamp >timestamp))
+      if (typeof Hours.findOne({hour: now, month:month, day:day,press:num}) === 'undefined'&&moment().format("HH")>=now &&(Hours.find({press:num,timestamp:{$lte: timestamp}, month:month}).fetch().pop().timestamp<Parts.find({timestamp: {$lt: timestamp}},{press:num}).fetch().pop().timestamp||Hours.find({press:num, month:month}).fetch().pop().timestamp >timestamp))
       {
       if (typeof Parts.findOne({hour:now, month: month, day: day,press:num})=== 'object'  && count >=2)
       {
          //no end job submitted     
        
-        incomingcycles1p= Cycles.find({PressNumber: num,AutoStatus: "1", CycleTimeStamp: {$gte: moment(Parts.find({hour:now, month: month, day: day,press:num}, {sort: {minute: 1}, limit: 2}).fetch().pop()).format("YYYY-MM-DD HH:mm:ss.SSS"), $lt: end}}).count() * Parts.find({hour:now, month: month, day: day,press:num}, {sort: {minute: 1}, limit: 2}).fetch().pop().cavitation;
+        incomingcycles3p= Cycles.find({PressNumber: num,AutoStatus: "1", CycleTimeStamp: {$gte: moment(Parts.find({hour:now, month: month, day: day,press:num}, {sort: {minute: 1}, limit: 2}).fetch().pop()).format("YYYY-MM-DD HH:mm:ss.SSS"), $lt: end}}).count() * Parts.find({hour:now, month: month, day: day,press:num}, {sort: {minute: 1}, limit: 2}).fetch().pop().cavitation;
          
       }
       if (typeof Parts.findOne({hour:now, month: month, day: day,press:num})=== 'object'  && count ===1)
       {//only want to run this if there was not an end job submitted after that last submitted job
          //start from submitted job, go until end job 
        
-        incomingcycles1p= Cycles.find({PressNumber: num,AutoStatus: "1", CycleTimeStamp: {$gte: moment(Parts.find({hour:now, month: month, day: day,press:num}, {sort: {minute: 1}, limit: 1}).fetch().pop()).format("YYYY-MM-DD HH:mm:ss.SSS"), $lt: end}}).count() * Parts.find({hour:now, month: month, day: day,press:num}, {sort: {minute: 1}, limit: 1}).fetch().pop().cavitation;
+        incomingcycles2p= Cycles.find({PressNumber: num,AutoStatus: "1", CycleTimeStamp: {$gte: moment(Parts.find({hour:now, month: month, day: day,press:num}, {sort: {minute: 1}, limit: 1}).fetch().pop()).format("YYYY-MM-DD HH:mm:ss.SSS"), $lt: end}}).count() * Parts.find({hour:now, month: month, day: day,press:num}, {sort: {minute: 1}, limit: 1}).fetch().pop().cavitation;
          
       }  
      
-      	return incomingcycles1p
+        return incomingcycles3p
      }
 
 //There was not a job running into this hour
-     if (typeof Hours.findOne({hour: now, month:month, day:day,press:num}) === 'object' &&moment().format("HH")>=now &&(Hours.find({press:num,timestamp:{$lt: timestamp}, month:month}).fetch().pop().timestamp<Parts.find({press:num,hour:{$lt: now}, month:month}).fetch().pop().timestamp||Hours.find({press:num, month:month}).fetch().pop().timestamp >timestamp))
+     if (typeof Hours.findOne({hour: now, month:month, day:day,press:num}) === 'object' &&moment().format("HH")>=now &&(Hours.find({press:num,timestamp:{$lte: timestamp}, month:month}).fetch().pop().timestamp<Parts.find({timestamp: {$lt: timestamp}},{press:num}).fetch().pop().timestamp||Hours.find({press:num, month:month}).fetch().pop().timestamp >timestamp))
      {
-     	//if end job submitted and count is >=1, start from first time stamp and go until end job
-		if (typeof Parts.findOne({hour:now, month: month, day: day,press:num})=== 'object'  && count >=2)
+      //if end job submitted and count is >=1, start from first time stamp and go until end job
+    if (typeof Parts.findOne({hour:now, month: month, day: day,press:num})=== 'object'  && count >=2)
       {
                
-        incomingcycles1p=  Cycles.find({PressNumber: num,AutoStatus: "1", CycleTimeStamp: {$gte: moment(Parts.find({hour:now, month: month, day: day,press:num}, {sort: {minute: 1}, limit: 2}).fetch().pop()).format("YYYY-MM-DD HH:mm:ss.SSS"), $lt: moment(Hours.find({hour: now, month:month, day:day,press:num}).fetch().pop().timestamp).format("YYYY-MM-DD HH:mm:ss.SSS")}}).count() * Parts.find({hour:now, month: month, day: day,press:num}, {sort: {minute: 1}, limit: 1}).fetch().pop().cavitation;
+        incomingcycles3p=  Cycles.find({PressNumber: num,AutoStatus: "1", CycleTimeStamp: {$gte: moment(Parts.find({hour:now, month: month, day: day,press:num}, {sort: {minute: 1}, limit: 2}).fetch().pop()).format("YYYY-MM-DD HH:mm:ss.SSS"), $lt: moment(Hours.find({hour: now, month:month, day:day,press:num}).fetch().pop().timestamp).format("YYYY-MM-DD HH:mm:ss.SSS")}}).count() * Parts.find({hour:now, month: month, day: day,press:num}, {sort: {minute: 1}, limit: 1}).fetch().pop().cavitation;
                 
       }
             
-     return incomingcycles1p
+     return incomingcycles3p
      }
-      },
+      },     
+
 
 
         incomingc1:function(){
@@ -1226,7 +1225,7 @@ if (typeof Hours.findOne({hour: now, month:month, day:day,press:num}) === 'undef
   
   //redone code below
 
-if (typeof Hours.findOne({hour: now, month:month, day:day,press:num}) === 'undefined' &&moment().format("HH")>=now&&(Hours.find({press:num,timestamp:{$lt: timestamp}, month:month}).fetch().pop().timestamp<Parts.find({press:num,hour:{$lt: now}, month:month}).fetch().pop().timestamp||Hours.find({press:num, month:month}).fetch().pop().timestamp >timestamp))
+if (typeof Hours.findOne({hour: now, month:month, day:day,press:num}) === 'undefined' &&moment().format("HH")>=now&&(Hours.find({press:num,timestamp:{$lt: timestamp}, month:month}).fetch().pop().timestamp<Parts.find({timestamp: {$lt: timestamp}},{press:num}).fetch().pop().timestamp||Hours.find({press:num, month:month}).fetch().pop().timestamp >timestamp))
 {
 //all of this when there is a job still running from the previous hour
     
@@ -1246,7 +1245,7 @@ if (typeof Hours.findOne({hour: now, month:month, day:day,press:num}) === 'undef
 }
  //These conditions assume that there is a job still running
 
- if (typeof Hours.findOne({hour: now, month:month, day:day,press:num}) === 'object' &&moment().format("HH")>=now&&(Hours.find({press:num,timestamp:{$lte: timestamp}, month:month}).fetch().pop().timestamp<Parts.find({press:num,hour:{$lte: now}, month:month}).fetch().pop().timestamp||Hours.find({press:num, month:month}).fetch().pop().timestamp >timestamp))
+ if (typeof Hours.findOne({hour: now, month:month, day:day,press:num}) === 'object' &&moment().format("HH")>=now&&(Hours.find({press:num,timestamp:{$lte: timestamp}, month:month}).fetch().pop().timestamp<Parts.find({timestamp: {$lt: timestamp}},{press:num}).fetch().pop().timestamp||Hours.find({press:num, month:month}).fetch().pop().timestamp >timestamp))
  {
 
  	//in these conditions there was an end job submitted this hour and there was a previous job running into this hour
@@ -1279,7 +1278,7 @@ if (typeof Hours.findOne({hour: now, month:month, day:day,press:num}) === 'undef
     } 
 
    //This code will run if there was not a previous job running
-      if (typeof Hours.findOne({hour: now, month:month, day:day,press:num}) === 'undefined' &&moment().format("HH")>=now&&Hours.find({press:num,timestamp:{$lt: timestamp}, month:month}).fetch().pop().timestamp>Parts.find({press:num,hour:{$lt: now}, month:month}).fetch().pop().timestamp)
+      if (typeof Hours.findOne({hour: now, month:month, day:day,press:num}) === 'undefined' &&moment().format("HH")>=now&&Hours.find({press:num,timestamp:{$lt: timestamp}, month:month}).fetch().pop().timestamp>Parts.find({timestamp: {$lt: timestamp}},{press:num}).fetch().pop().timestamp)
  {
  if (typeof Parts.findOne({hour: now, month:month, day:day}) === 'object' && count>=1)
       {
@@ -1308,7 +1307,7 @@ num= Machines.find().fetch().pop().cellnum;
 
      //basically reformat this to have everything start from the last submitted job
      
-if (typeof Hours.findOne({hour: now, month:month, day:day,press:num}) === 'undefined'&&moment().format("HH")>=now &&(Hours.find({press:num,timestamp:{$lt: timestamp}, month:month}).fetch().pop().timestamp<Parts.find({press:num,hour:{$lt: now}, month:month}).fetch().pop().timestamp||Hours.find({press:num, month:month}).fetch().pop().timestamp >timestamp))
+if (typeof Hours.findOne({hour: now, month:month, day:day,press:num}) === 'undefined'&&moment().format("HH")>=now &&(Hours.find({press:num,timestamp:{$lt: timestamp}, month:month}).fetch().pop().timestamp<Parts.find({timestamp: {$lt: timestamp}},{press:num}).fetch().pop().timestamp||Hours.find({press:num, month:month}).fetch().pop().timestamp >timestamp))
       {
       if (typeof Parts.findOne({hour:now, month: month, day: day,press:num})=== 'object'  && count >=2)
       {
@@ -1351,8 +1350,8 @@ if (typeof Hours.findOne({hour: now, month:month, day:day,press:num}) === 'undef
 },
 
  incomingc2:function(){
-
-		num= Machines.find().fetch().pop().cellnum;
+//basically start from the previous job 
+    num= Machines.find().fetch().pop().cellnum;
     
       start=moment().format("YYYY-MM-DD 08:00:00.000")
     end=moment().format("YYYY-MM-DD 09:00:00.000")
@@ -1365,8 +1364,8 @@ if (typeof Hours.findOne({hour: now, month:month, day:day,press:num}) === 'undef
   
   //redone code below
 
-if (typeof Hours.findOne({hour: now, month:month, day:day,press:num}) === 'undefined' &&moment().format("HH")>=now&&(Hours.find({press:num,timestamp:{$lt: timestamp}, month:month}).fetch().pop().timestamp<Parts.find({press:num,hour:{$lt: now}, month:month}).fetch().pop().timestamp||Hours.find({press:num, month:month}).fetch().pop().timestamp >timestamp))
-{console.log("1")
+if (typeof Hours.findOne({hour: now, month:month, day:day,press:num}) === 'undefined' &&moment().format("HH")>=now&&(Hours.find({press:num,timestamp:{$lt: timestamp}, month:month}).fetch().pop().timestamp<Parts.find({timestamp: {$lt: timestamp}},{press:num}).fetch().pop().timestamp||Hours.find({press:num, month:month}).fetch().pop().timestamp >timestamp))
+{
 //all of this when there is a job still running from the previous hour
     
  //I will need to show the cycles from the beginning of the hour until the end of the hour if no job is submitted this hour 
@@ -1381,19 +1380,19 @@ if (typeof Hours.findOne({hour: now, month:month, day:day,press:num}) === 'undef
     total2= Cycles.find({PressNumber: num,AutoStatus: "1",CycleTimeStamp: {$gte: moment(Parts.find({timestamp: {$lt: timestamp}},{press:num}).fetch().pop().timestamp).format("YYYY-MM-DD HH:mm:ss.SSS"), $lt: moment(Parts.find({hour:now, month: month, day: day,press:num}, {sort: {minute: 1}, limit: 1}).fetch().pop().timestamp).format("YYYY-MM-DD HH:mm:ss.SSS")}}).count() *Parts.find({timestamp: {$lt: timestamp}},{press:num}).fetch().pop().cavitation;
   }
 
-    return total2
+    return total2 
 }
  //These conditions assume that there is a job still running
 
- if (typeof Hours.findOne({hour: now, month:month, day:day,press:num}) === 'object' &&moment().format("HH")>=now&&(Hours.find({press:num,timestamp:{$lt: timestamp}, month:month}).fetch().pop().timestamp<Parts.find({press:num,hour:{$lt: now}, month:month}).fetch().pop().timestamp||Hours.find({press:num, month:month}).fetch().pop().timestamp >timestamp))
- {console.log("2")
+ if (typeof Hours.findOne({hour: now, month:month, day:day,press:num}) === 'object' &&moment().format("HH")>=now&&(Hours.find({press:num,timestamp:{$lte: timestamp}, month:month}).fetch().pop().timestamp<Parts.find({timestamp: {$lt: timestamp}},{press:num}).fetch().pop().timestamp||Hours.find({press:num, month:month}).fetch().pop().timestamp >timestamp))
+ {
 
- 	//in these conditions there was an end job submitted this hour and there was a previous job running into this hour
+  //in these conditions there was an end job submitted this hour and there was a previous job running into this hour
 
-	//
+  //
  if (typeof Parts.findOne({hour: now, month:month, day:day}) === 'object' && count>=1&& Hours.find({hour: now, month:month, day:day,press:num}).fetch().pop().timestamp>Parts.find({press:num, month:month}).fetch().pop().timestamp)
       {
-      	//Do this if the end job TS if greater than part TS
+        //Do this if the end job TS if greater than part TS
     total2= Cycles.find({PressNumber: num,AutoStatus: "1",CycleTimeStamp: {$gte: moment(Parts.find({timestamp: {$lt: timestamp}},{press:num}).fetch().pop().timestamp).format("YYYY-MM-DD HH:mm:ss.SSS"), $lt: moment(Hours.find({hour: now, month:month, day:day,press:num}).fetch().pop().timestamp).format("YYYY-MM-DD HH:mm:ss.SSS")}}).count() * Parts.find({timestamp: {$lt: timestamp}},{press:num}).fetch().pop().cavitation;
   }
 
@@ -1418,18 +1417,18 @@ if (typeof Hours.findOne({hour: now, month:month, day:day,press:num}) === 'undef
     } 
 
    //This code will run if there was not a previous job running
-      if (typeof Hours.findOne({hour: now, month:month, day:day,press:num}) === 'undefined' &&moment().format("HH")>=now&&Hours.find({press:num,timestamp:{$lt: timestamp}, month:month}).fetch().pop().timestamp>Parts.find({press:num,hour:{$lt: now}, month:month}).fetch().pop().timestamp)
+      if (typeof Hours.findOne({hour: now, month:month, day:day,press:num}) === 'undefined' &&moment().format("HH")>=now&&Hours.find({press:num,timestamp:{$lt: timestamp}, month:month}).fetch().pop().timestamp>Parts.find({timestamp: {$lt: timestamp}},{press:num}).fetch().pop().timestamp)
  {
  if (typeof Parts.findOne({hour: now, month:month, day:day}) === 'object' && count>=1)
-      {console.log("3")
-      	//Do this if the end job TS if greater than part TS
+      {
+        //Do this if the end job TS if greater than part TS
     total2= Cycles.find({PressNumber: num,AutoStatus: "1",CycleTimeStamp: {$gte: moment(Parts.find({hour:now, month: month, day: day,press:num}, {sort: {minute: 1}, limit: 1}).fetch().pop().timestamp).format("YYYY-MM-DD HH:mm:ss.SSS"), $lt: end}}).count() * Parts.find({hour:now, month: month, day: day,press:num}, {sort: {minute: 1}, limit: 1}).fetch().pop().cavitation;
   
   }
 
  
-	return total2 
-}                
+  return total2
+}       
 },
 
 incomingc2p:function()
@@ -1442,38 +1441,38 @@ num= Machines.find().fetch().pop().cellnum;
     start=moment().format("YYYY-MM-DD 08:00:00.000")
     end=moment().format("YYYY-MM-DD 09:00:00.000")
      now=moment(start).format("HH")
-      timestamp= moment().format("YYYY-MM-DD 08:59:00.000")
+      timestamp= moment().format("YYYY-MM-DD 08:00:00.000")
      count= Parts.find({hour: now, month:month, day:day,press:num}).count()
 
      //basically reformat this to have everything start from the last submitted job
      
-if (typeof Hours.findOne({hour: now, month:month, day:day,press:num}) === 'undefined'&&moment().format("HH")>=now &&(Hours.find({press:num,timestamp:{$lte: timestamp}, month:month}).fetch().pop().timestamp<Parts.find({press:num,hour:{$lte: now}, month:month}).fetch().pop().timestamp||Hours.find({press:num, month:month}).fetch().pop().timestamp >timestamp))
+if (typeof Hours.findOne({hour: now, month:month, day:day,press:num}) === 'undefined'&&moment().format("HH")>=now &&(Hours.find({press:num,timestamp:{$lt: timestamp}, month:month}).fetch().pop().timestamp<Parts.find({timestamp: {$lt: timestamp}},{press:num}).fetch().pop().timestamp||Hours.find({press:num, month:month}).fetch().pop().timestamp >timestamp))
       {
       if (typeof Parts.findOne({hour:now, month: month, day: day,press:num})=== 'object'  && count >=2)
       {
          //no end job submitted     
        
-        total1p= Cycles.find({PressNumber: num,AutoStatus: "1", CycleTimeStamp: {$gte: moment(Parts.find({hour:now, month: month, day: day,press:num}, {sort: {minute: 1}, limit: 2}).fetch().pop()).format("YYYY-MM-DD HH:mm:ss.SSS"), $lt: end}}).count() * Parts.find({hour:now, month: month, day: day,press:num}, {sort: {minute: 1}, limit: 2}).fetch().pop().cavitation;
+        total2p= Cycles.find({PressNumber: num,AutoStatus: "1", CycleTimeStamp: {$gte: moment(Parts.find({hour:now, month: month, day: day,press:num}, {sort: {minute: 1}, limit: 2}).fetch().pop()).format("YYYY-MM-DD HH:mm:ss.SSS"), $lt: end}}).count() * Parts.find({hour:now, month: month, day: day,press:num}, {sort: {minute: 1}, limit: 2}).fetch().pop().cavitation;
          
       }
       if (typeof Parts.findOne({hour:now, month: month, day: day,press:num})=== 'object'  && count ===1)
       {//only want to run this if there was not an end job submitted after that last submitted job
          //start from submitted job, go until end job 
        
-        total1p= Cycles.find({PressNumber: num,AutoStatus: "1", CycleTimeStamp: {$gte: moment(Parts.find({hour:now, month: month, day: day,press:num}, {sort: {minute: 1}, limit: 1}).fetch().pop()).format("YYYY-MM-DD HH:mm:ss.SSS"), $lt: end}}).count() * Parts.find({hour:now, month: month, day: day,press:num}, {sort: {minute: 1}, limit: 1}).fetch().pop().cavitation;
+        total2p= Cycles.find({PressNumber: num,AutoStatus: "1", CycleTimeStamp: {$gte: moment(Parts.find({hour:now, month: month, day: day,press:num}, {sort: {minute: 1}, limit: 1}).fetch().pop()).format("YYYY-MM-DD HH:mm:ss.SSS"), $lt: end}}).count() * Parts.find({hour:now, month: month, day: day,press:num}, {sort: {minute: 1}, limit: 1}).fetch().pop().cavitation;
          
       }  
      
-      	return total1p
+        return total2p
      }
 
      if (typeof Hours.findOne({hour: now, month:month, day:day,press:num}) === 'object')
      {
-     	//if end job submitted and count is >=1, start from first time stamp and go until end job
-		if (typeof Parts.findOne({hour:now, month: month, day: day,press:num})=== 'object'  && count >=2)
+      //if end job submitted and count is >=1, start from first time stamp and go until end job
+    if (typeof Parts.findOne({hour:now, month: month, day: day,press:num})=== 'object'  && count >=2)
       {
                
-        total1p=  Cycles.find({PressNumber: num,AutoStatus: "1", CycleTimeStamp: {$gte: moment(Parts.find({hour:now, month: month, day: day,press:num}, {sort: {minute: 1}, limit: 2}).fetch().pop()).format("YYYY-MM-DD HH:mm:ss.SSS"), $lt: moment(Hours.find({hour: now, month:month, day:day,press:num}).fetch().pop().timestamp).format("YYYY-MM-DD HH:mm:ss.SSS")}}).count() * Parts.find({hour:now, month: month, day: day,press:num}, {sort: {minute: 1}, limit: 1}).fetch().pop().cavitation;
+        total2p=  Cycles.find({PressNumber: num,AutoStatus: "1", CycleTimeStamp: {$gte: moment(Parts.find({hour:now, month: month, day: day,press:num}, {sort: {minute: 1}, limit: 2}).fetch().pop()).format("YYYY-MM-DD HH:mm:ss.SSS"), $lt: moment(Hours.find({hour: now, month:month, day:day,press:num}).fetch().pop().timestamp).format("YYYY-MM-DD HH:mm:ss.SSS")}}).count() * Parts.find({hour:now, month: month, day: day,press:num}, {sort: {minute: 1}, limit: 1}).fetch().pop().cavitation;
          
        
       }
@@ -1481,69 +1480,93 @@ if (typeof Hours.findOne({hour: now, month:month, day:day,press:num}) === 'undef
       {
          //start from submitted job, go until end job 
        
-        total1p= Cycles.find({PressNumber: num,AutoStatus: "1", CycleTimeStamp: {$gte: moment(Parts.find({hour:now, month: month, day: day,press:num}, {sort: {minute: 1}, limit: 1}).fetch().pop()).format("YYYY-MM-DD HH:mm:ss.SSS"), $lt: moment(Hours.find({hour: now, month:month, day:day,press:num}).fetch().pop().timestamp).format("YYYY-MM-DD HH:mm:ss.SSS")}}).count() * Parts.find({hour:now, month: month, day: day,press:num}, {sort: {minute: 1}, limit: 1}).fetch().pop().cavitation;
+        total2p= Cycles.find({PressNumber: num,AutoStatus: "1", CycleTimeStamp: {$gte: moment(Parts.find({hour:now, month: month, day: day,press:num}, {sort: {minute: 1}, limit: 1}).fetch().pop()).format("YYYY-MM-DD HH:mm:ss.SSS"), $lt: moment(Hours.find({hour: now, month:month, day:day,press:num}).fetch().pop().timestamp).format("YYYY-MM-DD HH:mm:ss.SSS")}}).count() * Parts.find({hour:now, month: month, day: day,press:num}, {sort: {minute: 1}, limit: 1}).fetch().pop().cavitation;
          
       }  
       
-     return total1p
+     return total2p
      }
 },
  incomingc3:function(){
-
-		num= Machines.find().fetch().pop().cellnum;
+//basically start from the previous job 
+    num= Machines.find().fetch().pop().cellnum;
     
       start=moment().format("YYYY-MM-DD 09:00:00.000")
     end=moment().format("YYYY-MM-DD 10:00:00.000")
      now=moment(start).format("HH")
     month=moment().format("MM")
     day=moment().format("DD")
-    timestamp= moment().format("YYYY-MM-DD 09:59:00.000")  
+    timestamp= moment().format("YYYY-MM-DD 09:00:00.000")  
      count= Parts.find({hour: now, month:month, day:day,press:num}).count()
   //If ther was a job submitted this hour then
-  if (typeof Hours.findOne({hour: now, month:month, day:day,press:num}) === 'undefined' &&moment().format("HH")>=now &&(Hours.find({press:num,timestamp:{$lte: timestamp}, month:month}).fetch().pop().timestamp<Parts.find({press:num,hour:{$lte: now}, month:month}).fetch().pop().timestamp||Hours.find({press:num, month:month}).fetch().pop().timestamp >timestamp))
-{
-//all this is activated whenever a job is submitted in this hour
-  if (typeof Parts.findOne({hour: now, month:month, day:day,press:num}) === 'object' && count===1)
-       {
-    total1= Cycles.find({PressNumber: num,AutoStatus: "1",CycleTimeStamp: {$gte: moment(Parts.find({hour:now, month: month, day: day,press:num}, {sort: {minute: 1}, limit: 1}).fetch().pop().timestamp).format("YYYY-MM-DD HH:mm:ss.SSS"), $lt: end}}).count() * Parts.find({hour:now, month: month, day: day,press:num}, {sort: {minute: 1}, limit: 1}).fetch().pop().cavitation;
-   }
- 
-//so there is no job this hour
-  if (typeof Parts.findOne({hour: now, month:month, day:day,press:num}) === 'undefined' && moment().format("mm") >=now)
- {
-   //This needs to be setup to multiply the cycles by the last submitted Part so fetch().pop()
-     total1= Cycles.find({PressNumber: num,AutoStatus: "1",CycleTimeStamp: {$gte: moment(Parts.find({timestamp: {$lt: timestamp}},{press:num}).fetch().pop().timestamp).format("YYYY-MM-DD HH:mm:ss.SSS"), $lt: end}}).count() * Parts.find({timestamp: {$lt: timestamp}},{press:num}).fetch().pop().cavitation;
   
-     }
-     return total1
-     }
-//This code is run if there is an end job sent
-if (typeof Hours.findOne({hour: now, month:month, day:day,press:num}) === 'object')
- {
-//run this code when there is a job started in this hour
- if (typeof Parts.findOne({hour: now, month:month, day:day,press:num}) === 'object'&& count>=1 && Hours.find({hour: now, month:month, day:day,press:num}).fetch().pop().timestamp>Parts.find({press:num, month:month}).fetch().pop().timestamp)
-      {
-    total1= Cycles.find({PressNumber: num,AutoStatus: "1",CycleTimeStamp: {$gte: moment(Parts.find({hour:now, month: month, day: day,press:num}, {sort: {minute: 1}, limit: 1}).fetch().pop().timestamp).format("YYYY-MM-DD HH:mm:ss.SSS"), $lt: moment(Hours.find({hour: now, month:month, day:day,press:num}).fetch().pop().timestamp).format("YYYY-MM-DD HH:mm:ss.SSS")}}).count() * Parts.find({hour:now, month: month, day: day,press:num}, {sort: {minute: 1}, limit: 1}).fetch().pop().cavitation;
-  }
-  else if (typeof Parts.findOne({hour: now, month:month, day:day}) === 'object' && count>=1&& Hours.find({hour: now, month:month, day:day,press:num}).fetch().pop().timestamp<Parts.find({press:num, month:month}).fetch().pop().timestamp)
-      {
-        //the start time is same.  The end time will be the most recent job
+  //redone code below
 
-    total1= Cycles.find({PressNumber: num,AutoStatus: "1",CycleTimeStamp: {$gte: moment(Parts.find({hour:now, month: month, day: day,press:num}, {sort: {minute: 1}, limit: 1}).fetch().pop().timestamp).format("YYYY-MM-DD HH:mm:ss.SSS"), $lt: moment(Parts.find({hour:now, month: month, day: day,press:num}, {sort: {minute: 1}, limit: 2}).fetch().pop().timestamp).format("YYYY-MM-DD HH:mm:ss.SSS")}}).count() *Parts.find({timestamp: {$lt: timestamp}},{press:num}).fetch().pop().cavitation;
-  }
- 
-
-//if there is not a job submitted this hour
- if (typeof Parts.findOne({hour: now, month:month, day:day,press:num}) === 'undefined' && moment().format("mm")>now)
+if (typeof Hours.findOne({hour: now, month:month, day:day,press:num}) === 'undefined' &&moment().format("HH")>=now&&(Hours.find({press:num,timestamp:{$lt: timestamp}, month:month}).fetch().pop().timestamp<Parts.find({timestamp: {$lt: timestamp}},{press:num}).fetch().pop().timestamp||Hours.find({press:num, month:month}).fetch().pop().timestamp >timestamp))
 {
-  //This needs to be setup to multiply the cycles by the last submitted Part so fetch().pop()
-    total1= Cycles.find({PressNumber: num,AutoStatus: "1",CycleTimeStamp: {$gte: moment(Parts.find({timestamp: {$lt: timestamp}},{press:num}).fetch().pop()).format("YYYY-MM-DD HH:mm:ss.SSS"), $lt: moment(Hours.find({hour: now, month:month, day:day,press:num}).fetch().pop().timestamp).format("YYYY-MM-DD HH:mm:ss.SSS")}}).count() * Parts.find({timestamp: {$lt: timestamp}},{press:num}).fetch().pop().cavitation;
+//all of this when there is a job still running from the previous hour
+    
+ //I will need to show the cycles from the beginning of the hour until the end of the hour if no job is submitted this hour 
+ if (typeof Parts.findOne({hour: now, month:month, day:day,press:num}) === 'undefined' && moment().format("HH") >=now)
+{ 
+  //multiply it by the cavitation of the the job less than the current hour
+     total3=  Cycles.find({PressNumber: num,AutoStatus: "1",CycleTimeStamp: {$gte: moment(Parts.find({timestamp: {$lt: timestamp}},{press:num}).fetch().pop().timestamp).format("YYYY-MM-DD HH:mm:ss.SSS"), $lt: end}}).count() * Parts.find({timestamp: {$lt: timestamp}},{press:num}).fetch().pop().cavitation;
   
     }
-    return total1
-    }  
+     if (typeof Parts.findOne({hour: now, month:month, day:day,press:num}) === 'object' && count>=1)
+      { //show all the data from the previous job until the first job is submitted
+    total3= Cycles.find({PressNumber: num,AutoStatus: "1",CycleTimeStamp: {$gte: moment(Parts.find({timestamp: {$lt: timestamp}},{press:num}).fetch().pop().timestamp).format("YYYY-MM-DD HH:mm:ss.SSS"), $lt: moment(Parts.find({hour:now, month: month, day: day,press:num}, {sort: {minute: 1}, limit: 1}).fetch().pop().timestamp).format("YYYY-MM-DD HH:mm:ss.SSS")}}).count() *Parts.find({timestamp: {$lt: timestamp}},{press:num}).fetch().pop().cavitation;
+  }
+
+    return total3 
+}
+ //These conditions assume that there is a job still running
+
+ if (typeof Hours.findOne({hour: now, month:month, day:day,press:num}) === 'object' &&moment().format("HH")>=now&&(Hours.find({press:num,timestamp:{$lte: timestamp}, month:month}).fetch().pop().timestamp<Parts.find({timestamp: {$lt: timestamp}},{press:num}).fetch().pop().timestamp||Hours.find({press:num, month:month}).fetch().pop().timestamp >timestamp))
+ {
+
+  //in these conditions there was an end job submitted this hour and there was a previous job running into this hour
+
+  //
+ if (typeof Parts.findOne({hour: now, month:month, day:day}) === 'object' && count>=1&& Hours.find({hour: now, month:month, day:day,press:num}).fetch().pop().timestamp>Parts.find({press:num, month:month}).fetch().pop().timestamp)
+      {
+        //Do this if the end job TS if greater than part TS
+    total3= Cycles.find({PressNumber: num,AutoStatus: "1",CycleTimeStamp: {$gte: moment(Parts.find({timestamp: {$lt: timestamp}},{press:num}).fetch().pop().timestamp).format("YYYY-MM-DD HH:mm:ss.SSS"), $lt: moment(Hours.find({hour: now, month:month, day:day,press:num}).fetch().pop().timestamp).format("YYYY-MM-DD HH:mm:ss.SSS")}}).count() * Parts.find({timestamp: {$lt: timestamp}},{press:num}).fetch().pop().cavitation;
+  }
+
+ 
+  else if (typeof Parts.findOne({hour: now, month:month, day:day}) === 'object' && count>=1&& Hours.find({hour: now, month:month, day:day,press:num}).fetch().pop().timestamp<Parts.find({hour:now, month: month, day: day,press:num}, {sort: {minute: 1}, limit: 2}).fetch().pop().timestamp)
+      {
+        //the start time is same.  end at end job time stamp
+
+    total3= Cycles.find({PressNumber: num,AutoStatus: "1",CycleTimeStamp: {$gte: moment(Parts.find({timestamp: {$lt: timestamp}},{press:num}).fetch().pop().timestamp).format("YYYY-MM-DD HH:mm:ss.SSS"), $lt: moment(Hours.find({hour: now, month:month, day:day,press:num}).fetch().pop().timestamp).format("YYYY-MM-DD HH:mm:ss.SSS")}}).count() * Parts.find({timestamp: {$lt: timestamp}},{press:num}).fetch().pop().cavitation;
+  }
+ 
+//This find the last submitted part prior to this hour
+
+ if (typeof Parts.findOne({hour: now, month:month, day:day,press:num}) === 'undefined'&& moment().format("HH") >=now)
+{
+  //There has to be a job running for this to happen
+     total3= Cycles.find({PressNumber: num,AutoStatus: "1",CycleTimeStamp: {$gte: moment(Parts.find({timestamp: {$lt: timestamp}},{press:num}).fetch().pop().timestamp).format("YYYY-MM-DD HH:mm:ss.SSS"), $lt: moment(Hours.find({hour: now, month:month, day:day,press:num}).fetch().pop().timestamp).format("YYYY-MM-DD HH:mm:ss.SSS")}}).count() * Parts.find({timestamp: {$lt: timestamp}},{press:num}).fetch().pop().cavitation;
+  
+    }
    
-        
+    return total3 
+    } 
+
+   //This code will run if there was not a previous job running
+      if (typeof Hours.findOne({hour: now, month:month, day:day,press:num}) === 'undefined' &&moment().format("HH")>=now&&Hours.find({press:num,timestamp:{$lt: timestamp}, month:month}).fetch().pop().timestamp>Parts.find({timestamp: {$lt: timestamp}},{press:num}).fetch().pop().timestamp)
+ {
+ if (typeof Parts.findOne({hour: now, month:month, day:day}) === 'object' && count>=1)
+      {
+        //Do this if the end job TS if greater than part TS
+    total3= Cycles.find({PressNumber: num,AutoStatus: "1",CycleTimeStamp: {$gte: moment(Parts.find({hour:now, month: month, day: day,press:num}, {sort: {minute: 1}, limit: 1}).fetch().pop().timestamp).format("YYYY-MM-DD HH:mm:ss.SSS"), $lt: end}}).count() * Parts.find({hour:now, month: month, day: day,press:num}, {sort: {minute: 1}, limit: 1}).fetch().pop().cavitation;
+  
+  }
+
+ 
+  return total3 
+}       
 },
 
 incomingc3p:function()
@@ -1556,18 +1579,18 @@ num= Machines.find().fetch().pop().cellnum;
     start=moment().format("YYYY-MM-DD 09:00:00.000")
     end=moment().format("YYYY-MM-DD 10:00:00.000")
      now=moment(start).format("HH")
-      timestamp= moment().format("YYYY-MM-DD 09:59:00.000")
+      timestamp= moment().format("YYYY-MM-DD 09:00:00.000")
      count= Parts.find({hour: now, month:month, day:day,press:num}).count()
 
      //basically reformat this to have everything start from the last submitted job
      
-if (typeof Hours.findOne({hour: now, month:month, day:day,press:num}) === 'undefined'&&moment().format("HH")>=now &&(Hours.find({press:num,timestamp:{$lte: timestamp}, month:month}).fetch().pop().timestamp<Parts.find({press:num,hour:{$lte: now}, month:month}).fetch().pop().timestamp||Hours.find({press:num, month:month}).fetch().pop().timestamp >timestamp))
+if (typeof Hours.findOne({hour: now, month:month, day:day,press:num}) === 'undefined'&&moment().format("HH")>=now &&(Hours.find({press:num,timestamp:{$lt: timestamp}, month:month}).fetch().pop().timestamp<Parts.find({timestamp: {$lt: timestamp}},{press:num}).fetch().pop().timestamp||Hours.find({press:num, month:month}).fetch().pop().timestamp >timestamp))
       {
       if (typeof Parts.findOne({hour:now, month: month, day: day,press:num})=== 'object'  && count >=2)
       {
          //no end job submitted     
        
-        total1p= Cycles.find({PressNumber: num,AutoStatus: "1", CycleTimeStamp: {$gte: moment(Parts.find({hour:now, month: month, day: day,press:num}, {sort: {minute: 1}, limit: 2}).fetch().pop()).format("YYYY-MM-DD HH:mm:ss.SSS"), $lt: end}}).count() * Parts.find({hour:now, month: month, day: day,press:num}, {sort: {minute: 1}, limit: 2}).fetch().pop().cavitation;
+        total3p= Cycles.find({PressNumber: num,AutoStatus: "1", CycleTimeStamp: {$gte: moment(Parts.find({hour:now, month: month, day: day,press:num}, {sort: {minute: 1}, limit: 2}).fetch().pop()).format("YYYY-MM-DD HH:mm:ss.SSS"), $lt: end}}).count() * Parts.find({hour:now, month: month, day: day,press:num}, {sort: {minute: 1}, limit: 2}).fetch().pop().cavitation;
          
       }
       if (typeof Parts.findOne({hour:now, month: month, day: day,press:num})=== 'object'  && count ===1)
@@ -1578,16 +1601,16 @@ if (typeof Hours.findOne({hour: now, month:month, day:day,press:num}) === 'undef
          
       }  
      
-      	return total1p
+        return total3p
      }
 
      if (typeof Hours.findOne({hour: now, month:month, day:day,press:num}) === 'object')
      {
-     	//if end job submitted and count is >=1, start from first time stamp and go until end job
-		if (typeof Parts.findOne({hour:now, month: month, day: day,press:num})=== 'object'  && count >=2)
+      //if end job submitted and count is >=1, start from first time stamp and go until end job
+    if (typeof Parts.findOne({hour:now, month: month, day: day,press:num})=== 'object'  && count >=2)
       {
                
-        total1p=  Cycles.find({PressNumber: num,AutoStatus: "1", CycleTimeStamp: {$gte: moment(Parts.find({hour:now, month: month, day: day,press:num}, {sort: {minute: 1}, limit: 2}).fetch().pop()).format("YYYY-MM-DD HH:mm:ss.SSS"), $lt: moment(Hours.find({hour: now, month:month, day:day,press:num}).fetch().pop().timestamp).format("YYYY-MM-DD HH:mm:ss.SSS")}}).count() * Parts.find({hour:now, month: month, day: day,press:num}, {sort: {minute: 1}, limit: 1}).fetch().pop().cavitation;
+        total3p=  Cycles.find({PressNumber: num,AutoStatus: "1", CycleTimeStamp: {$gte: moment(Parts.find({hour:now, month: month, day: day,press:num}, {sort: {minute: 1}, limit: 2}).fetch().pop()).format("YYYY-MM-DD HH:mm:ss.SSS"), $lt: moment(Hours.find({hour: now, month:month, day:day,press:num}).fetch().pop().timestamp).format("YYYY-MM-DD HH:mm:ss.SSS")}}).count() * Parts.find({hour:now, month: month, day: day,press:num}, {sort: {minute: 1}, limit: 1}).fetch().pop().cavitation;
          
        
       }
@@ -1595,11 +1618,11 @@ if (typeof Hours.findOne({hour: now, month:month, day:day,press:num}) === 'undef
       {
          //start from submitted job, go until end job 
        
-        total1p= Cycles.find({PressNumber: num,AutoStatus: "1", CycleTimeStamp: {$gte: moment(Parts.find({hour:now, month: month, day: day,press:num}, {sort: {minute: 1}, limit: 1}).fetch().pop()).format("YYYY-MM-DD HH:mm:ss.SSS"), $lt: moment(Hours.find({hour: now, month:month, day:day,press:num}).fetch().pop().timestamp).format("YYYY-MM-DD HH:mm:ss.SSS")}}).count() * Parts.find({hour:now, month: month, day: day,press:num}, {sort: {minute: 1}, limit: 1}).fetch().pop().cavitation;
+        total3p= Cycles.find({PressNumber: num,AutoStatus: "1", CycleTimeStamp: {$gte: moment(Parts.find({hour:now, month: month, day: day,press:num}, {sort: {minute: 1}, limit: 1}).fetch().pop()).format("YYYY-MM-DD HH:mm:ss.SSS"), $lt: moment(Hours.find({hour: now, month:month, day:day,press:num}).fetch().pop().timestamp).format("YYYY-MM-DD HH:mm:ss.SSS")}}).count() * Parts.find({hour:now, month: month, day: day,press:num}, {sort: {minute: 1}, limit: 1}).fetch().pop().cavitation;
          
       }  
       
-     return total1p
+     return total3p
      }
 },
 
